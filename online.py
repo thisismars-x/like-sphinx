@@ -139,12 +139,16 @@ def build_docs_html(filename="file.py", remove_py_extensions=True):
         color: white; border: none; 
     }}
     .copy-btn:hover {{ background: #1d4ed8; }}
-    a.clickable-header {{
+    a.clickable-header,
+    a.clickable-header:visited {{
+        color: #38bdf8;
         text-decoration: none;
         cursor: pointer;
-    }}
     a.clickable-header:hover {{
+        color: #38bdf8;
         text-decoration: underline;
+    }}
+    a.clickable-header:active {{
         color: #38bdf8;
     }}
     </style>

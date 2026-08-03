@@ -90,7 +90,17 @@ def _walk(node):
 
 
 def extract_structure(filename: str = "file.py") -> Optional[dict]:
-    ''' Extracts structure of the file by walking through it's AST. '''
+    '''
+    Extracts structure of the file by walking through it's AST. 
+
+    Aware. Always check for None, as files starting with _ are skipped.
+    Aware. Always check for None, as items without docs are also skipped.
+
+    Use: 
+    >>> structure = extract_structure()
+    >>> assert structure != None, "No documentation for this item"
+    >>> build_html_page(structure, atomic=True) # some made up function
+    '''
 
     if filename.startswith("_"): return None # secret files
 

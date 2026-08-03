@@ -82,6 +82,15 @@ def main():
             shutil.rmtree(Path.home() / "like-sphinx" / "docs")
             print(f"Cleaned all generated docs in /like-sphinx/docs")
         finally: return
+    if "help" in sys.argv: # display help and exit
+        print(f"# This is linker.py")
+        print(f"# To compile all your docs, use `linker.py`")
+        print(f"# To compile all your docs, and then_open in a browser, use `linker.py then_open`")
+        print(f"# To compile all your docs, and save them in the current directory, use `linker.py save_here`")
+        print(f"# To clean all emitted documentation files, use `linker.py clean`")
+        print(f"# NOTE: Files are generated not by package name but pwd")
+        print(f"# NOTE: Files are emitted to ~/like-sphinx/docs/<pwd>/")
+        return
 
     from time import perf_counter_ns
     start = perf_counter_ns()
@@ -92,7 +101,8 @@ def main():
     if "then_open" in sys.argv:
         import webbrowser
         webbrowser.open(Path(f"{OUTPUT_DIR}/index.html").resolve().as_uri())
-    
+    if "save_here" in sys.argv: shutil.copytree(OUTPUT_DIR, "./docs", dirs_exist_ok = True)
+
     fend = perf_counter_ns()
     print(f"like-sphinx ran for {(end - start) / 1e9:.3f} ms. Excluding browser time, total({(fend-start) / 1e9:.3f}ms).")
 
